@@ -1,0 +1,24 @@
+import sqlite3
+
+def create_table():
+    # Connect to the database
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+
+    # Create the users table if it doesn't exist
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        email TEXT NOT NULL
+    )
+    """)
+
+    # Commit changes and close the connection
+    conn.commit()
+    conn.close()
+
+# Call create_table function when the application starts
+create_table()
+
+# Your existing Flask routes and app code here
